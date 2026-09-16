@@ -1,9 +1,7 @@
-tap "asmvik/formulae"
+tap "asmvik/formulae", trusted: true
 
-# window manager + hotkeys (this machine pins yabai 7.1.15 via a local tap)
+# window manager (this machine pins yabai 7.1.15 via a local tap)
 brew "asmvik/formulae/yabai"
-brew "asmvik/formulae/skhd"
-
 # Text processing scripting language
 brew "awk"
 # Library for command-line editing
@@ -122,6 +120,8 @@ brew "nixfmt"
 brew "opam"
 # Highly capable, feature-rich programming language
 brew "perl"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Object-relational database system
@@ -168,6 +168,8 @@ brew "ykman"
 brew "zig"
 # General-purpose lossless data-compression library
 brew "zlib"
+# Simple hotkey-daemon for macOS.
+brew "asmvik/formulae/skhd"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Audio utility
