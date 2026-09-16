@@ -1,0 +1,22 @@
+#!/bin/bash
+# regenerate chezmoi's Brewfile from what's installed, then commit + push if it changed
+set -euo pipefail
+
+src="$(chezmoi source-path)"
+brewfile="$src/Brewfile"
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+
+brew bundle dump --force --file="$tmp" --no-vscode --no-go --no-cargo --no-uv --no-npm 2>/dev/null
+
+# this machine pins yabai via a local tap (not dumped, not portable); other machines use asmvik/formulae
+sed -i '' 's|^tap "local/yabai"$|\
+# window manager (this machine pins yabai 7.1.15 via a local tap)\
+brew "asmvik/formulae/yabai"|' "$tmp"
+
+cmp -s "$tmp" "$brewfile" && exit 0
+
+cp "$tmp" "$brewfile"
+chezmoi git -- add Brewfile
+chezmoi git -- commit -q -m "brewfile: sync installed packages"
+chezmoi git -- push -q
