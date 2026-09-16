@@ -20,16 +20,25 @@ macOS dotfiles managed with [chezmoi](https://chezmoi.io).
 
 ## Day to day
 
-```sh
-chezmoi edit ~/.zshrc      # or edit the real file, then: chezmoi re-add
-chezmoi diff
-chezmoi cd && git commit -am "..." && git push
-```
-
-Refresh the Brewfile after installing things:
+`autoCommit` + `autoPush` are on (`.chezmoi.toml.tmpl`), so add/re-add commit and push by themselves.
 
 ```sh
-brew bundle dump --formula --cask --tap --force --file="$(chezmoi source-path)/Brewfile"
+chezmoi re-add                  # after editing tracked files in place
+chezmoi add ~/path/to/new/file  # track a new file (or a dir: adds what's in it now; new files later need add again)
+chezmoi diff                    # what `apply` would change on this machine
+chezmoi update                  # pull from GitHub + apply (other machines)
 ```
 
-yabai/skhd come from a tap homebrew flags as untrusted, so `dump` drops them - re-add those lines by hand.
+Don't `chezmoi apply` with unsaved local edits: it overwrites them with the repo version. `re-add` first.
+
+Source-only files (`README.md`, `Brewfile`, `.chezmoi*`, `run_*` scripts) aren't auto-committed:
+
+```sh
+chezmoi git -- add -A && chezmoi git -- commit -m "..." && chezmoi git -- push
+```
+
+### Brewfile
+
+Syncs itself: `.zshrc` wraps `brew`, and after install/uninstall/tap/untap/autoremove runs
+`~/.local/bin/brewfile-sync` in the background (dump, commit, push; log in `~/.cache/brewfile-sync.log`).
+Run `brewfile-sync` by hand if needed. It swaps this machine's local yabai tap back to `asmvik/formulae/yabai`.
