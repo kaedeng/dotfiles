@@ -153,8 +153,8 @@ brew "tectonic"
 brew "terminal-notifier"
 # TOML formatter, linter and language server
 brew "tombi"
-# Terminal multiplexer
-brew "tmux"
+# Terminal multiplexer (patched for synchronized output, see homebrew/Formula/tmux.rb)
+brew "local/tmux/tmux"
 # Plugin manager for tmux
 brew "tpm"
 # Display directories as trees (with optional color/HTML output)

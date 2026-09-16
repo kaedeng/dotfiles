@@ -1,0 +1,28 @@
+#!/bin/bash
+# puts the patched tmux formula (homebrew/Formula/tmux.rb) into the local/tmux
+# tap and swaps out homebrew-core's tmux if that's what is installed.
+# the Brewfile installs local/tmux/tmux; brew upgrade rebuilds it when core bumps tmux.
+# formula hash: {{ include "homebrew/Formula/tmux.rb" | sha256sum }}
+set -euo pipefail
+
+if [[ ! -x /opt/homebrew/bin/brew ]]; then
+  echo "homebrew not installed - skipping tmux tap" >&2
+  exit 0
+fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+tap="$(brew --repository)/Library/Taps/local/homebrew-tmux"
+mkdir -p "$tap/Formula"
+cp {{ joinPath .chezmoi.sourceDir "homebrew/Formula/tmux.rb" | quote }} "$tap/Formula/tmux.rb"
+
+receipt="$(brew --prefix)/opt/tmux/INSTALL_RECEIPT.json"
+if [[ -f $receipt ]]; then
+  installed_tap="$(plutil -extract source.tap raw "$receipt" 2>/dev/null || true)"
+  if [[ $installed_tap != "local/tmux" ]]; then
+    # tpm depends on tmux, and the tap build satisfies it
+    brew uninstall --ignore-dependencies tmux
+    brew install local/tmux/tmux
+  elif [[ $(brew outdated --formula --quiet local/tmux/tmux) ]]; then
+    brew upgrade local/tmux/tmux
+  fi
+fi
