@@ -56,6 +56,18 @@ _sfw() {
 function npm  { _sfw npm "$@" }
 function pnpm { _sfw pnpm "$@" }
 
+# keep chezmoi's Brewfile in sync after package changes (commits + pushes in background)
+function brew {
+  command brew "$@"
+  local rc=$?
+  case $1 in
+    install|reinstall|uninstall|remove|rm|autoremove|tap|untap)
+      brewfile-sync >>"${XDG_CACHE_HOME:-$HOME/.cache}/brewfile-sync.log" 2>&1 &!
+      ;;
+  esac
+  return $rc
+}
+
 
 # -- aliases / functions -------------------------------------------------------
 
