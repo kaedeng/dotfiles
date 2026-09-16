@@ -178,6 +178,7 @@ cask "background-music"
 cask "bitwarden"
 # Developer platform
 cask "dotnet-sdk"
+cask "font-caskaydia-cove-nerd-font"
 cask "font-hack-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
