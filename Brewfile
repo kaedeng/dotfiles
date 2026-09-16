@@ -1,5 +1,5 @@
 tap "asmvik/formulae", trusted: true
-tap "local/tmux", trusted: { formulae: ["tmux"] }
+tap "local/tmux"
 
 # window manager (this machine pins yabai 7.1.15 via a local tap)
 brew "asmvik/formulae/yabai"
@@ -153,6 +153,8 @@ brew "tectonic"
 brew "terminal-notifier"
 # TOML formatter, linter and language server
 brew "tombi"
+# Terminal multiplexer
+brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
 # Display directories as trees (with optional color/HTML output)
@@ -169,6 +171,8 @@ brew "zig"
 brew "zlib"
 # Simple hotkey-daemon for macOS.
 brew "asmvik/formulae/skhd"
+# Terminal multiplexer (synchronized-output patch)
+brew "local/tmux/tmux", trusted: true
 # A tiling window manager for macOS based on binary space partitioning.
 brew "local/yabai/yabai", trusted: true
 # Enable Windows-like alt-tab
