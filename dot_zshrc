@@ -37,7 +37,8 @@ source $ZSH/oh-my-zsh.sh
 export GPG_TTY=$TTY
 
 # nvm is slow to source; load it on first use (default node is already on PATH via .zprofile)
-nvm() {
+# (`function name {` form: old aliases of the same name can't break re-sourcing)
+function nvm {
   unfunction nvm
   source "$NVM_DIR/nvm.sh"
   nvm "$@"
@@ -52,8 +53,8 @@ _sfw() {
     return 1
   fi
 }
-npm()  { _sfw npm "$@" }
-pnpm() { _sfw pnpm "$@" }
+function npm  { _sfw npm "$@" }
+function pnpm { _sfw pnpm "$@" }
 
 
 # -- aliases / functions -------------------------------------------------------
