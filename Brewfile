@@ -1,4 +1,5 @@
 tap "asmvik/formulae", trusted: true
+tap "local/tmux", trusted: { formulae: ["tmux"] }
 
 # window manager (this machine pins yabai 7.1.15 via a local tap)
 brew "asmvik/formulae/yabai"
@@ -150,8 +151,6 @@ brew "tcl-tk@8"
 brew "tectonic"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
-# Terminal multiplexer
-brew "tmux"
 # TOML formatter, linter and language server
 brew "tombi"
 # Plugin manager for tmux
