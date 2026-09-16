@@ -170,6 +170,8 @@ brew "zig"
 brew "zlib"
 # Simple hotkey-daemon for macOS.
 brew "asmvik/formulae/skhd"
+# A tiling window manager for macOS based on binary space partitioning.
+brew "local/yabai/yabai", trusted: true
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Audio utility
