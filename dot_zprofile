@@ -1,0 +1,30 @@
+# login shells: environment + PATH (runs after /etc/zprofile's path_helper)
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+export EDITOR=nvim
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export DOTNET_ROOT=/usr/local/share/dotnet
+export NVM_DIR=$HOME/.nvm
+export LLAMA_CACHE=$HOME/models
+
+# tmux panes are login shells too, so keep PATH unique
+typeset -U path PATH
+path=(
+  $HOME/.local/bin   # uv, pipx
+  $GOBIN
+  /opt/homebrew/opt/libpq/bin
+  $HOME/.dotnet/tools
+  $path
+)
+
+# put nvm's default node on PATH without sourcing nvm.sh (~300ms); `nvm` lazy-loads in .zshrc.
+# expects a version-number alias (e.g. `nvm alias default 22`)
+() {
+  local v=$(<$NVM_DIR/alias/default)
+  path=($NVM_DIR/versions/node/v${v#v}*/bin(Nn[-1]) $path)
+} 2>/dev/null

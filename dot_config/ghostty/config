@@ -1,0 +1,8 @@
+theme = Catppuccin Frappe
+font-family = "CaskaydiaCove Nerd Font Mono"
+font-size = 16.0
+background-opacity = 0.9
+custom-shader = shaders/cursor_tail.glsl
+cursor-style-blink = true
+window-padding-x = 15
+window-padding-y = 10

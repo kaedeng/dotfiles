@@ -1,0 +1,67 @@
+# direnv output must happen before p10k instant prompt
+(( $+commands[direnv] )) && emulate zsh -c "$(direnv export zsh)"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+(( $+commands[direnv] )) && emulate zsh -c "$(direnv hook zsh)"
+
+
+# -- oh my zsh (runs compinit; don't call it again) ----------------------------
+
+export ZSH="$HOME/.oh-my-zsh"
+
+if [[ -n $__INTELLIJ_COMMAND_HISTFILE__ ]]; then
+  ZSH_THEME="robbyrussell"
+else
+  ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
+
+plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd)
+
+source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# -- tools ---------------------------------------------------------------------
+
+# opam (PATH + completion)
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+
+export GPG_TTY=$TTY
+
+# nvm is slow to source; load it on first use (default node is already on PATH via .zprofile)
+nvm() {
+  unfunction nvm
+  source "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+
+# route npm/pnpm through socket firewall; sfw is a global package of the active node
+_sfw() {
+  if (( $+commands[sfw] )); then
+    sfw "$@"
+  else
+    print -u2 "sfw not installed for node $(node -v 2>/dev/null) - install with: command npm i -g sfw"
+    return 1
+  fi
+}
+npm()  { _sfw npm "$@" }
+pnpm() { _sfw pnpm "$@" }
+
+
+# -- aliases / functions -------------------------------------------------------
+
+alias ls="ls -a"
+alias ta="tmux attach"
+alias kubectl="minikube kubectl --"
+
+cr() {
+    clang++ -std=c++17 -O2 -Wall "$1" -o "${1%.cpp}" && ./"${1%.cpp}"
+}

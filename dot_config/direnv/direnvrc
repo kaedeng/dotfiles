@@ -1,0 +1,9 @@
+source $HOME/.nix-profile/share/nix-direnv/direnvrc
+
+# `use brew_llvm` in an .envrc: build against homebrew llvm (was global in .zshrc)
+use_brew_llvm() {
+  local llvm=/opt/homebrew/opt/llvm
+  export LDFLAGS="-L$llvm/lib"
+  export CPPFLAGS="-I$llvm/include"
+  export CMAKE_PREFIX_PATH="$llvm"
+}

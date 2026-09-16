@@ -1,0 +1,10 @@
+[language-server.gopls.config]
+gofumpt = true
+
+[[language]]
+name = "go"
+auto-format = true
+
+[[language]]
+name = "rust"
+formatter = { command = "bash", args = ["-c", "rustfmt | dx fmt -f -"] }

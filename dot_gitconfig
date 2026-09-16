@@ -1,0 +1,19 @@
+[user]
+	name = kaedeng
+	email = 156162245+kaedeng@users.noreply.github.com
+	signingkey = 6ED0879DD07642D4
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[core]
+    excludesfile = ~/.gitignore
+[alias]
+	commit = commit -s
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

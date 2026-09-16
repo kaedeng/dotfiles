@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+GENERAL=(
+	split_type auto
+	split_ratio 0.5
+	auto_balance off
+	insert_feedback_color 0xff7793d1
+)
+
+WINDOWS=(
+	window_placement second_child
+	window_shadow float
+	window_opacity on
+	active_window_opacity 1.0
+	normal_window_opacity 0.9
+	window_animation_duration 0.0
+	window_origin_display focused
+	window_opacity_duration 0.15
+)
+
+LAYOUT=(
+	layout bsp
+	top_padding 12
+	bottom_padding 10
+	left_padding 10
+	right_padding 10
+	window_gap 5
+)
+
+BORDERS=(
+	window_border on
+	window_border_blur off
+	window_border_hidpi on
+	window_border_width 2
+	window_border_radius 12
+	active_window_border_color 0xff7793d1
+	normal_window_border_color 0xff5e6798
+)
+
+MOUSE=(
+	mouse_modifier alt 
+	mouse_action1 move
+	mouse_action2 resize
+	mouse_drop_action swap
+	focus_follows_mouse autoraise
+	mouse_follows_focus off
+)
+
+yabai -m config "${GENERAL[@]}"
+yabai -m config "${WINDOWS[@]}"
+#yabai -m config "${BORDERS[@]}"
+yabai -m config "${LAYOUT[@]}"
+yabai -m config "${MOUSE[@]}"
+
+UNMANAGED=(
+	Activity Monitor
+	Alfred
+	App Store
+	Archive Utility
+	Authy
+	Bitwarden
+	Calculator
+	Dictionary
+	FaceTime
+	Finder
+	LibreOffice
+	LuLu
+	Microsoft Remote Desktop
+	Photo Booth
+	Python
+	Screen Sharing
+	Screens
+	Software Update
+	Stats
+	Steam
+	System Information
+	System Preferences
+	System Settings
+	VLC
+	zoom.us
+)
+
+for ((i = 1; i <= "${#UNMANAGED[@]}"; i++)); do
+	yabai -m rule --add label="unmanage_${UNMANAGED[(($i - 1))]}" app="^${UNMANAGED[(($i - 1))]}.*$" manage=off 
+done
+
+# yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+yabai -m rule --add label="Zen Extensions" app="^Zen$" title="^Extension:" manage=off 
+yabai -m rule --add label="Orb Settings" app="^OrbStack$" title="^General$" manage=off 
+yabai -m rule --add label="Zed Open" app="^Zed$" title="^Open$" manage=off 
+yabai -m rule --add label="Zen Nightly" app="^Nightly$" title="^Nightly$" manage=off 
+yabai -m rule --add label="Riot Client" app="^Riot Client$" title="^Riot Client$" manage=off 

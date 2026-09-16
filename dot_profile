@@ -1,0 +1,8 @@
+# bash/sh login shells (zsh reads .zprofile instead)
+
+. "$HOME/.cargo/env"
+
+export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+
+# OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.bash 2>/dev/null || :
