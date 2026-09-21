@@ -153,8 +153,8 @@ brew "tectonic"
 brew "terminal-notifier"
 # TOML formatter, linter and language server
 brew "tombi"
-# Terminal multiplexer (patched for synchronized output, see homebrew/Formula/tmux.rb)
-brew "local/tmux/tmux"
+# Terminal multiplexer
+brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
 # Display directories as trees (with optional color/HTML output)
@@ -197,5 +197,7 @@ cask "orbstack"
 cask "scroll-reverser"
 # Instant messaging application focusing on security
 cask "signal"
+# PDF reader and note-taking application
+cask "skim"
 # Multimedia player
 cask "vlc"
