@@ -161,6 +161,8 @@ brew "tpm"
 brew "tree"
 # Parser generator tool
 brew "tree-sitter-cli"
+# Your favorite rust -> wasm workflow tool!
+brew "wasm-pack"
 # Language Server for Yaml Files
 brew "yaml-language-server"
 # Tool for managing your YubiKey configuration
