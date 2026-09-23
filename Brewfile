@@ -183,6 +183,8 @@ cask "alt-tab"
 cask "background-music"
 # Desktop password and login vault
 cask "bitwarden"
+# Screen recording software
+cask "cap"
 # Developer platform
 cask "dotnet-sdk"
 cask "font-caskaydia-cove-nerd-font"
