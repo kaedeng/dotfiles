@@ -10,7 +10,7 @@ brew "readline"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
+brew "openssl@3", link: true
 # Command-line interface for SQLite
 brew "sqlite"
 # General-purpose data compression with high compression ratio
@@ -193,6 +193,8 @@ cask "font-hack-nerd-font"
 cask "ghostty"
 # Utility to hide menu bar items
 cask "hiddenbar"
+# App providing offline access to Wikipedia and many other web sites
+cask "kiwix"
 # Verify system files structure, run miscellaneous maintenance and more
 cask "onyx"
 # Replacement for Docker Desktop
