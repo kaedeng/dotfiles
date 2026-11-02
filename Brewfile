@@ -195,8 +195,6 @@ cask "font-hack-nerd-font"
 cask "ghostty"
 # Utility to hide menu bar items
 cask "hiddenbar"
-# App providing offline access to Wikipedia and many other web sites
-cask "kiwix"
 # Verify system files structure, run miscellaneous maintenance and more
 cask "onyx"
 # Replacement for Docker Desktop
