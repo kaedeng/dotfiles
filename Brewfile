@@ -9,12 +9,12 @@ brew "awk"
 brew "readline"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3", link: true
 # Command-line interface for SQLite
 brew "sqlite"
 # General-purpose data compression with high compression ratio
 brew "xz"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Language Server for Bash
 brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -107,6 +107,8 @@ brew "luarocks"
 brew "make"
 # Personal Knowledge Management System for the LSP
 brew "markdown-oxide"
+# Create modern online books from Markdown files
+brew "mdbook"
 # Run a Kubernetes cluster locally
 brew "minikube"
 # Deep clean and optimize your Mac
@@ -199,6 +201,8 @@ cask "kiwix"
 cask "onyx"
 # Replacement for Docker Desktop
 cask "orbstack"
+# Companion app for Flipper Zero devices
+cask "qflipper"
 # Tool to reverse the direction of scrolling
 cask "scroll-reverser"
 # Instant messaging application focusing on security
