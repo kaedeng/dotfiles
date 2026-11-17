@@ -178,7 +178,7 @@ brew "asmvik/formulae/skhd"
 # Terminal multiplexer (synchronized-output patch)
 brew "local/tmux/tmux", trusted: true
 # A tiling window manager for macOS based on binary space partitioning.
-brew "local/yabai/yabai", trusted: true
+brew "local/yabai/yabai", pin: true, trusted: true
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Audio utility
